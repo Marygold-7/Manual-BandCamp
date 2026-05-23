@@ -272,3 +272,162 @@
     </article>
   </section>
 </template>
+
+<style scoped lang="scss">
+.logo-section {
+  padding: 140px 24px;
+  display: grid;
+  justify-items: center;
+  gap: 70px;
+  overflow: hidden;
+}
+.logo-intro {
+  width: min(1280px, calc(100vw - 48px));
+  min-height: 520px;
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(360px, .92fr);
+  align-items: stretch;
+  gap: clamp(28px, 4vw, 72px);
+}
+.logo-intro--primary {
+  min-height: 440px;
+}
+.logo-intro--wide {
+  min-height: 620px;
+}
+.logo-visual {
+  min-height: inherit;
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 34px;
+  padding: 48px;
+}
+.logo-copy {
+  min-height: inherit;
+  width: 100%;
+  display: grid;
+  place-content: center;
+  justify-items: start;
+  padding: 48px;
+}
+.logo-copy p + p {
+  margin-top: 18px;
+}
+.label {
+  color: #77c9e5;
+  font-weight: 700;
+  margin: 0;
+}
+.animated-logo {
+  width: min(980px, 110%);
+  height: auto;
+  overflow: visible;
+}
+.animated-logo text {
+  font-family: "POI Orbiter Trial", Arial, Helvetica, sans-serif;
+  font-size: 300px;
+  font-weight: 700;
+}
+.safe-copy,
+.safe-visual {
+  min-height: inherit;
+  display: grid;
+  place-content: center;
+  padding: 48px;
+}
+.safe-copy {
+  justify-items: start;
+}
+.safe-copy h3 {
+  font-size: 34px;
+  line-height: 1;
+  font-weight: 400;
+  margin: 0 0 28px;
+}
+.logo-copy p,
+.safe-copy h3,
+.safe-copy p {
+  width: min(420px, 100%);
+  text-align: left;
+}
+.logo-copy p,
+.safe-copy p {
+  font-size: 16px;
+  line-height: 1.16;
+  margin: 0;
+}
+.safe-copy p + p {
+  margin-top: 18px;
+}
+.safe-graphic {
+  width: min(920px, 112%);
+  height: auto;
+  overflow: visible;
+}
+.safe-graphic text {
+  font-family: "POI Orbiter Trial", Arial, Helvetica, sans-serif;
+}
+.safe-logo-text {
+  fill: #000;
+  font-size: 156px;
+  font-weight: 700;
+}
+.capture {
+  display: block;
+  width: min(100%, 760px);
+  height: auto;
+}
+.capture--safe {
+  width: min(100%, 820px);
+}
+.capture--wrong-logo {
+  width: min(112%, 900px);
+}
+.sizes {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(70px, 9vw, 140px);
+}
+.sizes article {
+  display: grid;
+  justify-items: center;
+  gap: 28px;
+}
+.sizes p {
+  font-size: 18px;
+  margin: 0;
+}
+.size-sample {
+  position: relative;
+  min-width: clamp(175px, 18vw, 240px);
+  min-height: 105px;
+  display: grid;
+  place-items: center;
+  border-left: 2px solid #e42924;
+  border-right: 2px solid #e42924;
+}
+.size-sample::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 20px;
+  height: 2px;
+  background: #e42924;
+}
+.size-sample strong {
+  font-size: clamp(36px, 4.2vw, 58px);
+  line-height: 1;
+}
+.size-sample span {
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  color: #e42924;
+  font-size: 16px;
+  transform: translate(-50%, 100%);
+}
+
+</style>
