@@ -109,3 +109,188 @@
     </article>
   </section>
 </template>
+
+<style scoped lang="scss">
+.color-section {
+  padding: 140px 24px;
+  display: grid;
+  justify-items: center;
+  gap: 70px;
+  overflow: hidden;
+}
+.color-block {
+  width: min(1280px, calc(100vw - 48px));
+  min-height: 520px;
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(360px, .92fr);
+  align-items: stretch;
+  gap: clamp(28px, 4vw, 72px);
+}
+.color-visual,
+.copy {
+  min-height: inherit;
+  display: grid;
+  place-content: center;
+  padding: 48px;
+}
+.color-visual {
+  justify-items: center;
+}
+.copy {
+  justify-items: start;
+  width: 100%;
+  margin: 0;
+}
+.copy h2 {
+  width: min(420px, 100%);
+  text-align: left;
+  margin: 0 0 28px;
+  font-size: 30px;
+  font-weight: 600;
+}
+.swatches {
+  width: 100%;
+  display: grid;
+  gap: 64px;
+  margin: 0;
+}
+.basic {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  width: min(620px, 100%);
+}
+.basic .circle,
+.accent .circle {
+  border: 0;
+}
+.accent {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  width: min(660px, 100%);
+  gap: 54px 70px;
+}
+.swatches article {
+  display: grid;
+  justify-items: center;
+}
+.circle {
+  width: clamp(150px, 14vw, 210px);
+  height: clamp(150px, 14vw, 210px);
+  border: 1px solid #000;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  margin: 0 0 48px;
+  font-size: 22px;
+}
+.accent .circle {
+  width: clamp(135px, 12vw, 180px);
+  height: clamp(135px, 12vw, 180px);
+}
+.swatches p {
+  width: min(190px, 100%);
+  display: grid;
+  grid-template-columns: 86px 1fr;
+  font-size: 16px;
+  line-height: 1.1;
+  margin: 0 0 32px;
+}
+.swatches p:last-child {
+  margin-bottom: 0;
+}
+.swatches b {
+  font-weight: 700;
+}
+.copy p {
+  width: min(420px, 100%);
+  font-size: 18px;
+  line-height: 1.18;
+  margin: 0;
+}
+.copy p + p {
+  margin-top: 22px;
+}
+.wrong-capture {
+  width: min(780px, 112%);
+  height: auto;
+  display: block;
+  margin: 0;
+}
+.ui-row {
+  width: min(680px, 100%);
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  justify-items: center;
+  gap: 54px;
+  margin: 0;
+}
+.form-samples {
+  display: grid;
+  gap: 20px;
+  width: 230px;
+}
+.form-samples label,
+.form-samples button {
+  height: 38px;
+  border: 1px solid #e42924;
+  border-radius: 5px;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 0 10px;
+  color: #e42924;
+  font: inherit;
+}
+.form-samples input {
+  min-width: 0;
+  flex: 1;
+  border: 0;
+  outline: 0;
+  font: inherit;
+}
+.particle-button {
+  border: 0;
+  min-width: 220px;
+  min-height: 110px;
+  background: #fff;
+  color: #e42924;
+  font: inherit;
+  background-image: radial-gradient(#000 2px, transparent 2px);
+  background-size: 14px 14px;
+}
+.link-grid {
+  display: grid;
+  grid-template-columns: repeat(2, max-content);
+  gap: 26px 56px;
+}
+.link-grid a {
+  font-size: 30px;
+  text-decoration: underline;
+}
+.accent-link {
+  color: #bc8ebf;
+}
+@media (max-width: 900px) {
+  .color-block,
+  .accent,
+  .ui-row {
+    grid-template-columns: 1fr;
+  }
+  .color-block {
+    min-height: auto;
+    gap: 0;
+  }
+  .color-visual,
+  .copy {
+    min-height: auto;
+    padding: 32px 0;
+  }
+  .basic {
+    grid-template-columns: 1fr;
+  }
+  .ui-row {
+    gap: 42px;
+  }
+}
+</style>
