@@ -1,3 +1,71 @@
+
+<script setup>
+import { onBeforeUnmount, onMounted, ref } from "vue";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import ParticleCloud from "../ui/ParticleCloud.vue";
+
+gsap.registerPlugin(ScrollTrigger);
+
+const logoSection = ref(null);
+const animatedLogo = ref(null);
+const animatedLogoText = ref(null);
+const safeGraphic = ref(null);
+let logoContext;
+
+onMounted(() => {
+  logoContext = gsap.context(() => {
+    const text = animatedLogoText.value;
+    if (!text) return;
+
+    const length = text.getComputedTextLength();
+
+    gsap.set(text, {
+      fill: "transparent",
+      stroke: "#000",
+      strokeWidth: 1.2,
+      strokeDasharray: length,
+      strokeDashoffset: length,
+    });
+
+    gsap.timeline({
+      scrollTrigger: {
+        trigger: animatedLogo.value,
+        start: "top 76%",
+        once: true,
+      },
+    })
+      .to(text, {
+        strokeDashoffset: 0,
+        duration: 1.35,
+        ease: "power2.inOut",
+      })
+      .to(text, {
+        fill: "#000",
+        strokeWidth: 0,
+        duration: 0.55,
+        ease: "power2.out",
+      }, "-=0.12");
+
+    gsap.from(safeGraphic.value, {
+      autoAlpha: 0,
+      y: 28,
+      duration: 0.75,
+      ease: "power3.out",
+      scrollTrigger: {
+        trigger: safeGraphic.value,
+        start: "top 76%",
+        once: true,
+      },
+    });
+  }, logoSection);
+});
+
+onBeforeUnmount(() => {
+  logoContext?.revert();
+});
+</script>
+
 <template>
   <section ref="logoSection" id="logotipos" class="logo-section">
     <article class="logo-intro logo-intro--primary">
