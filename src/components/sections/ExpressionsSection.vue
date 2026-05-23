@@ -724,4 +724,6 @@ onBeforeUnmount(() => {
   .value-word { font-size: clamp(44px, 12vw, 72px); }
 }
 
+
+
 </style>
