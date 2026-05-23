@@ -1,3 +1,230 @@
+<script setup>
+import { nextTick, onBeforeUnmount, onMounted, ref } from 'vue'
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
+gsap.registerPlugin(ScrollTrigger)
+
+const historySection = ref(null)
+const historyTitle = ref(null)
+const historyImage = ref(null)
+const historyCopy = ref(null)
+const expressionPage = ref(null)
+const musicSection = ref(null)
+const musicTitle = ref(null)
+const musicText = ref(null)
+const valuesSection = ref(null)
+const valuesCopy = ref(null)
+const valueWordRefs = ref([])
+const activeValueIndex = ref(0)
+
+let historyContext
+let musicContext
+let textContext
+let valuesContext
+
+const values = [
+  {
+    label: 'Intimidad',
+    text: 'La identidad se construye como un susurro, no como un anuncio. No busca imponerse, sino acercarse. Los espacios respiran, las tipografias hablan sin gritar, y cada imagen parece tomada desde adentro, no desde afuera. Aqui el diseno no interrumpe: acompana. Se siente como hojear un cuaderno personal, como descubrir una cancion en soledad.',
+  },
+  {
+    label: 'Autenticidad',
+    text: 'La marca se expresa desde lo real: artistas, sellos y oyentes que comparten musica sin artificio. La identidad evita el brillo generico y prioriza una presencia honesta, directa y reconocible. Cada recurso grafico debe sentirse hecho desde la escena independiente, con criterio propio y sin perder humanidad.',
+  },
+  {
+    label: 'Vinculo',
+    text: 'Todo esta dispuesto para que la distancia desaparezca. El lenguaje visual refuerza la conexion directa entre artista y oyente, convirtiendo cada punto de contacto en un encuentro cercano. La comunidad no aparece como fondo: es la estructura que sostiene la experiencia.',
+  },
+]
+
+const setValueWordRef = (el, index) => {
+  if (el) valueWordRefs.value[index] = el
+}
+
+const selectValue = (index) => {
+  if (index === activeValueIndex.value) return
+
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  const currentWord = valueWordRefs.value[activeValueIndex.value]
+  const nextWord = valueWordRefs.value[index]
+
+  if (prefersReducedMotion) {
+    activeValueIndex.value = index
+    return
+  }
+
+  gsap.killTweensOf([valuesCopy.value, currentWord, nextWord])
+  gsap.to(currentWord, { scale: 1, duration: 0.36, ease: 'power3.out' })
+  gsap.to(valuesCopy.value, {
+    autoAlpha: 0,
+    y: 18,
+    duration: 0.2,
+    ease: 'power2.in',
+    onComplete: () => {
+      activeValueIndex.value = index
+      nextTick(() => {
+        gsap.fromTo(valuesCopy.value, { autoAlpha: 0, y: 18 }, {
+          autoAlpha: 1,
+          y: 0,
+          duration: 0.5,
+          ease: 'power3.out',
+        })
+        gsap.to(nextWord, { scale: 1.18, duration: 0.45, ease: 'power3.out' })
+      })
+    },
+  })
+}
+
+onMounted(() => {
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+  historyContext = gsap.context(() => {
+    const copyParts = gsap.utils.toArray('[data-history-part]')
+    const paragraphLines = gsap.utils.toArray('[data-history-line]')
+    const track = historyCopy.value?.querySelector('.timeline span')
+    const marker = historyCopy.value?.querySelector('.timeline-marker')
+
+    if (prefersReducedMotion) {
+      gsap.set([historyTitle.value, historyImage.value, ...copyParts, ...paragraphLines, track, marker], {
+        clearProps: 'all',
+      })
+      return
+    }
+
+    gsap.set(historyTitle.value, { autoAlpha: 0, y: 24 })
+    gsap.set(historyImage.value, { autoAlpha: 0, clipPath: 'inset(0 100% 0 0)' })
+    gsap.set(copyParts, { autoAlpha: 0, y: 32 })
+    gsap.set(paragraphLines, { autoAlpha: 0, yPercent: 120 })
+    gsap.set(track, { scaleX: 0, transformOrigin: 'left center' })
+    gsap.set(marker, { xPercent: -50, scale: 0, autoAlpha: 0 })
+
+    gsap.timeline({
+      defaults: { ease: 'power3.out' },
+      scrollTrigger: {
+        trigger: historySection.value,
+        start: 'top 68%',
+        once: true,
+      },
+    })
+      .to(historyTitle.value, { autoAlpha: 1, y: 0, duration: 0.7 })
+      .to(historyImage.value, {
+        autoAlpha: 1,
+        clipPath: 'inset(0 0% 0 0)',
+        duration: 0.95,
+      }, '-=0.25')
+      .to(copyParts, {
+        autoAlpha: 1,
+        y: 0,
+        duration: 0.7,
+        stagger: 0.08,
+      }, '-=0.55')
+      .to(track, { scaleX: 1, duration: 0.85 }, '-=0.45')
+      .to(marker, {
+        autoAlpha: 1,
+        scale: 1,
+        x: () => historyCopy.value?.querySelector('.timeline')?.offsetWidth || 0,
+        duration: 0.85,
+      }, '<')
+      .to(paragraphLines, {
+        autoAlpha: 1,
+        yPercent: 0,
+        duration: 0.65,
+        stagger: 0.07,
+      }, '-=0.25')
+  }, historySection)
+
+  valuesContext = gsap.context(() => {
+    if (prefersReducedMotion) return
+
+    gsap.set(valuesCopy.value, { autoAlpha: 1, y: 0 })
+    gsap.set(valueWordRefs.value, {
+      scale: 1,
+      transformOrigin: 'left center',
+    })
+    gsap.set(valueWordRefs.value[activeValueIndex.value], { scale: 1.18 })
+  }, valuesSection)
+
+  musicContext = gsap.context(() => {
+    const items = [musicTitle.value, musicText.value]
+
+    if (prefersReducedMotion) {
+      gsap.set(items, { clearProps: 'all' })
+      return
+    }
+
+    gsap.set(musicTitle.value, {
+      autoAlpha: 0,
+      y: 58,
+      clipPath: 'inset(0 0 100% 0)',
+    })
+    gsap.set(musicText.value, {
+      autoAlpha: 0,
+      y: 34,
+    })
+
+    gsap.timeline({
+      defaults: { ease: 'power3.out' },
+      scrollTrigger: {
+        trigger: musicSection.value,
+        start: 'top 70%',
+        once: true,
+      },
+    })
+      .to(musicTitle.value, {
+        autoAlpha: 1,
+        y: 0,
+        clipPath: 'inset(0 0 0% 0)',
+        duration: 0.9,
+      })
+      .to(musicText.value, {
+        autoAlpha: 1,
+        y: 0,
+        duration: 0.72,
+      }, '-=0.38')
+  }, musicSection)
+
+  textContext = gsap.context(() => {
+    const groups = gsap.utils.toArray('[data-expression-group]')
+
+    groups.forEach((group) => {
+      const items = gsap.utils.toArray(group.querySelectorAll('[data-expression-text]'))
+
+      if (!items.length) return
+
+      if (prefersReducedMotion) {
+        gsap.set(items, { clearProps: 'all' })
+        return
+      }
+
+      gsap.set(items, { autoAlpha: 0, y: 42 })
+
+      gsap.timeline({
+        defaults: { ease: 'power3.out' },
+        scrollTrigger: {
+          trigger: group,
+          start: 'top 72%',
+          once: true,
+        },
+      }).to(items, {
+        autoAlpha: 1,
+        y: 0,
+        duration: 0.82,
+        stagger: 0.11,
+      })
+    })
+  }, expressionPage)
+
+})
+
+onBeforeUnmount(() => {
+  historyContext?.revert()
+  musicContext?.revert()
+  textContext?.revert()
+  valuesContext?.revert()
+})
+</script>
+
 <template>
   <section ref="expressionPage" id="cómo-nos-expresamos" class="expression-page">
     <section class="home-hero section-white">
