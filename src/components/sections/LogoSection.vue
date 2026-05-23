@@ -595,4 +595,103 @@
     linear-gradient(0deg, transparent 32%, #d0d0d0 32% 32.5%, transparent 32.5% 67.5%, #d0d0d0 67.5% 68%, transparent 68%);
 }
 
+.isotype-safe .isotype-img {
+  width: 58%;
+}
+.safe-corner {
+  position: absolute;
+  color: #d8d8d8;
+  font-size: 54px;
+  font-weight: 700;
+}
+.safe-corner--tl { left: 14px; top: 4px; }
+.safe-corner--tr { right: 14px; top: 4px; }
+.safe-corner--bl { left: 14px; bottom: 4px; }
+.safe-corner--br { right: 14px; bottom: 4px; }
+.isotype-reduction {
+  display: flex;
+  align-items: end;
+  justify-content: center;
+  gap: clamp(42px, 7vw, 90px);
+}
+.isotype-reduction article {
+  display: grid;
+  justify-items: center;
+  gap: 12px;
+  color: #e42924;
+}
+.isotype-reduction .isotype-img {
+  width: clamp(118px, 13vw, 190px);
+  border-left: 2px solid #e42924;
+  border-right: 2px solid #e42924;
+  padding: 0 10px;
+}
+.isotype-reduction article:nth-child(2) .isotype-img {
+  width: clamp(100px, 11vw, 165px);
+}
+.isotype-reduction span {
+  font-size: 13px;
+}
+.isotype-contrast {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+}
+.isotype-contrast span {
+  width: clamp(140px, 18vw, 210px);
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  border: 1px solid #000;
+  border-radius: 8px;
+}
+.isotype-contrast span:first-child {
+  background: #000;
+  color: #fff;
+}
+.isotype-contrast .isotype-img {
+  width: 72%;
+}
+@media (max-width: 700px) {
+  .logo-intro {
+    width: min(100%, 92vw);
+    min-height: auto;
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  .logo-visual,
+  .logo-copy,
+  .safe-copy,
+  .safe-visual {
+    min-height: auto;
+    padding: 32px 0;
+  }
+  .sizes,
+  .contrast,
+  .isotype-reduction,
+  .isotype-contrast {
+    flex-direction: column;
+    gap: 24px;
+  }
+  .wrong-logo-grid,
+  .wrong-isotype-grid {
+    grid-template-columns: repeat(2, minmax(92px, 1fr));
+  }
+  .animated-logo text {
+    font-size: 300px;
+  }
+  .logo-copy,
+  .safe-copy {
+    justify-items: center;
+  }
+  .logo-copy p,
+  .safe-copy h3,
+  .safe-copy p {
+    width: min(420px, 100%);
+  }
+  .safe-copy h3 {
+    font-size: 28px;
+  }
+}
+
 </style>
