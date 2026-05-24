@@ -1,3 +1,139 @@
+<script setup>
+import { onBeforeUnmount, onMounted, ref } from "vue";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
+
+const imageSection = ref(null);
+const horizontalCarousel = ref(null);
+const verticalCarousel = ref(null);
+let imageContext;
+
+const referenceImages = [
+  {
+    label: "Piper Ferguson",
+    src: "/assets/images-section/piper-ferguson.png",
+  },
+  {
+    label: "Rafa Ariño",
+    src: "/assets/images-section/rafa-arino.png",
+  },
+];
+
+const horizontalImages = [
+  {
+    id: 1,
+    src: "/assets/images-section/horizontal-1.png",
+  },
+  {
+    id: 2,
+    src: "/assets/images-section/horizontal-4.png",
+  },
+  {
+    id: 3,
+    src: "/assets/images-section/horizontal-2.png",
+  },
+  {
+    id: 4,
+    src: "/assets/images-section/horizontal-3.png",
+  },
+];
+
+const verticalImages = [
+  {
+    id: 1,
+    src: "/assets/images-section/vertical-1.png",
+  },
+  {
+    id: 2,
+    src: "/assets/images-section/vertical-2.png",
+  },
+  {
+    id: 3,
+    src: "/assets/images-section/vertical-3.png",
+  },
+];
+
+onMounted(() => {
+  imageContext = gsap.context(() => {
+    const items = gsap.utils.toArray("[data-image-reveal]");
+
+    gsap.set(items, {
+      autoAlpha: 0,
+      y: 42,
+    });
+
+    gsap.to(items, {
+      autoAlpha: 1,
+      y: 0,
+      duration: 0.85,
+      ease: "power3.out",
+      stagger: 0.13,
+      scrollTrigger: {
+        trigger: imageSection.value,
+        start: "top 70%",
+        once: true,
+      },
+    });
+
+    const referenceCards = gsap.utils.toArray("[data-reference-card]");
+
+    if (referenceCards.length) {
+      referenceCards.forEach((card, index) => {
+        gsap.set(card, {
+          autoAlpha: 0,
+          x: index === 0 ? "-55vw" : "55vw",
+          y: 0,
+        });
+      });
+
+      gsap.to(referenceCards, {
+        autoAlpha: 1,
+        x: 0,
+        duration: 1.65,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: ".reference-grid",
+          start: "top 82%",
+          once: true,
+        },
+      });
+    }
+
+    const horizontalItems = gsap.utils.toArray("[data-horizontal-reveal]");
+    gsap.set(horizontalItems, {
+      autoAlpha: 0,
+      y: 46,
+    });
+
+    gsap.to(horizontalItems, {
+      autoAlpha: 1,
+      y: 0,
+      duration: 0.9,
+      ease: "power3.out",
+      stagger: 0.12,
+      scrollTrigger: {
+        trigger: ".horizontal-block",
+        start: "top 72%",
+        once: true,
+      },
+    });
+
+    const createHorizontalCarousel = (selector, startIndex = 1) => {
+      const cards = Array.from(
+        horizontalCarousel.value?.querySelectorAll(selector) || []
+      );
+      if (!cards.length) return;
+
+      const total = cards.length;
+      let active = startIndex;
+      const getDistance = () => {
+        const width = horizontalCarousel.value?.clientWidth || 840;
+        return Math.min(width * 0.36, 310);
+      };
+</script>
+
 <template>
   <section id="imágenes" ref="imageSection" class="image-section">
     <div class="image-content">
