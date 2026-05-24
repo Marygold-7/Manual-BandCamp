@@ -1,3 +1,41 @@
+<script setup>
+import { onBeforeUnmount, onMounted, ref } from "vue";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
+
+const scaleChart = ref(null);
+let typeContext;
+
+onMounted(() => {
+  typeContext = gsap.context(() => {
+    const lines = gsap.utils.toArray("[data-scale-line]");
+
+    gsap.set(lines, {
+      scaleX: 0,
+      transformOrigin: "left center",
+    });
+
+    gsap.to(lines, {
+      scaleX: 1,
+      duration: 0.9,
+      ease: "power3.out",
+      stagger: 0.08,
+      scrollTrigger: {
+        trigger: scaleChart.value,
+        start: "top 76%",
+        once: true,
+      },
+    });
+  }, scaleChart);
+});
+
+onBeforeUnmount(() => {
+  typeContext?.revert();
+});
+</script>
+
 <template>
   <section id="tipografía" class="type-section">
     <article class="type-block">
