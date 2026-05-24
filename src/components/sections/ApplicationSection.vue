@@ -1,16 +1,54 @@
 <script setup>
-import { appImages } from "../../data/brandData";
+import { onBeforeUnmount, onMounted, ref } from "vue";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
+
+const applicationSection = ref(null);
+let applicationContext;
 
 const applications = {
-  phoneFlat: appImages[0],
-  instagramHand: appImages[1],
-  frame: appImages[2],
-  posterBlack: appImages[3],
-  posterWhite: appImages[4],
-  tickets: appImages[5],
-  tshirt: appImages[0],
-  box: appImages[1],
+  phoneFlat: "/assets/applications/phone-flat.png",
+  instagramHand: "/assets/applications/instagram-hand.png",
+  frame: "/assets/applications/small-frame.png",
+  posterBlack: "/assets/applications/poster-black.png",
+  posterWhite: "/assets/applications/poster-white.png",
+  tickets: "/assets/applications/tickets.png",
+  tshirt: "/assets/applications/stickers-tshirt.png",
+  box: "/assets/applications/mailer-box.png",
 };
+
+onMounted(() => {
+  applicationContext = gsap.context(() => {
+    const items = gsap.utils.toArray("[data-application-reveal]");
+
+    gsap.set(items, {
+      autoAlpha: 0,
+      y: 42,
+      scale: 0.985,
+    });
+
+    items.forEach((item) => {
+      gsap.to(item, {
+        autoAlpha: 1,
+        y: 0,
+        scale: 1,
+        duration: 0.85,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: item,
+          start: "top 82%",
+          once: true,
+        },
+      });
+    });
+  }, applicationSection);
+});
+
+onBeforeUnmount(() => {
+  applicationContext?.revert();
+});
 </script>
 
 <template>
@@ -53,48 +91,58 @@ const applications = {
 
 <style scoped lang="scss">
 .application-section {
-  width: min(980px, calc(100% - 12vw));
-  margin: 0 auto;
-  padding: 130px 0 170px;
-  display: grid;
-  gap: 48px;
+  background: #fff;
 }
 
-.application-phones,
-.application-posters {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 32px;
-}
-
-figure {
+.application-section figure {
   margin: 0;
   overflow: hidden;
-  border-radius: 10px;
-  background: #f1f1f1;
 }
 
-img {
+.application-section img {
   width: 100%;
   height: 100%;
   display: block;
   object-fit: cover;
 }
 
-.application-phones figure {
-  aspect-ratio: 4 / 5;
+.application-phones {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
-.application-posters figure,
+.application-phones figure {
+  height: 730px;
+}
+
 .application-full {
-  aspect-ratio: 16 / 10;
+  height: 760px;
+}
+
+.application-posters {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.application-posters figure {
+  height: 760px;
 }
 
 .application-box {
-  aspect-ratio: 16 / 9;
+  background: #f5f5f5;
 }
 
-@media (max-width: 720px) {
+.application-box img {
+  object-fit: contain;
+}
+
+@media (max-width: 800px) {
+  .application-full,
+  .application-phones figure,
+  .application-posters figure {
+    height: 430px;
+  }
+
   .application-phones,
   .application-posters {
     grid-template-columns: 1fr;
