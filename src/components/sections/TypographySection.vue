@@ -184,3 +184,138 @@
     </article>
   </section>
 </template>
+
+<style scoped lang="scss">
+.type-section {
+  padding: 140px 24px;
+  display: grid;
+  justify-items: center;
+  gap: 70px;
+  overflow: hidden;
+}
+.type-block {
+  width: min(1280px, calc(100vw - 48px));
+  min-height: 560px;
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(360px, .92fr);
+  align-items: stretch;
+  gap: clamp(28px, 4vw, 72px);
+}
+.type-visual,
+.type-copy {
+  min-height: inherit;
+  display: grid;
+  place-content: center;
+  padding: 48px;
+}
+.type-visual {
+  justify-items: start;
+}
+.type-copy {
+  justify-items: start;
+}
+.type-copy h2,
+.type-copy p,
+.type-sample {
+  width: min(420px, 100%);
+}
+.type-copy h2 {
+  font-size: 30px;
+  line-height: 1;
+  font-weight: 600;
+  margin: 0 0 36px;
+}
+.type-copy p {
+  font-size: 16px;
+  line-height: 1.15;
+  margin: 0;
+}
+.type-copy p + p {
+  margin-top: 18px;
+}
+.spec {
+  font-size: clamp(28px, 3vw, 40px);
+  font-weight: 700;
+  line-height: 1.16;
+  margin: 0;
+}
+.type-visual--mono .spec,
+.type-sample--mono,
+.subtitle-leading {
+  font-family: "Logic Monospace", monospace;
+}
+.type-sample {
+  margin: 0 0 36px;
+}
+.type-sample strong {
+  display: block;
+  font-size: clamp(150px, 17vw, 280px);
+  line-height: .72;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+.type-sample span {
+  display: block;
+  font-size: clamp(34px, 4vw, 56px);
+  line-height: 1;
+  margin-top: 22px;
+}
+.scale-chart {
+  position: relative;
+  width: min(1180px, 150%);
+  display: grid;
+  place-items: center;
+  overflow: visible;
+}
+.scale-image {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+.scale-svg-line {
+  transform-box: fill-box;
+  stroke: #cfcfcf;
+  stroke-width: 1;
+}
+.scale-svg-line--dash {
+  stroke-dasharray: 7 8;
+}
+.scale-title,
+.scale-subtitle,
+.scale-body {
+  fill: #000;
+  font-family: "POI Orbiter Trial", Arial, Helvetica, sans-serif;
+}
+.scale-title {
+  font-size: 154px;
+  font-weight: 700;
+}
+.scale-subtitle {
+  font-size: 70px;
+  font-weight: 600;
+}
+.scale-body {
+  font-size: 42px;
+  font-weight: 400;
+}
+.leading-visual {
+  width: min(900px, 122%);
+  display: grid;
+  align-content: center;
+  gap: 58px;
+}
+.leading-visual p,
+.leading-visual span,
+.leading-title-group {
+  margin: 0;
+}
+.title-leading {
+  font-size: clamp(29px, 3.1vw, 48px);
+  line-height: 1;
+}
+.leading-title-group {
+  display: grid;
+  gap: 22px;
+}
+
+</style>
