@@ -99,7 +99,7 @@ onBeforeUnmount(() => {
       <div class="particles">
         <article class="particle-item" data-particle-reveal>
           <div class="particle-media">
-            <video src="/videos/concierto-publico.mp4" autoplay muted loop playsinline aria-label="Bandada de estorninos"></video>
+            <video src="/videos/bandada1.mp4" autoplay muted loop playsinline aria-label="Bandada de estorninos"></video>
           </div>
           <h3>Estorninos</h3>
           <div class="particle-copy">
@@ -123,7 +123,7 @@ onBeforeUnmount(() => {
 
         <article class="particle-item" data-particle-reveal>
           <div class="particle-media">
-            <video src="/videos/concierto.mp4" autoplay muted loop playsinline aria-label="Vídeo de partículas"></video>
+            <video src="/videos/Bandada%20simple%20.mp4" autoplay muted loop playsinline aria-label="Vídeo de partículas"></video>
           </div>
           <h3>Partículas</h3>
           <div class="particle-copy">
