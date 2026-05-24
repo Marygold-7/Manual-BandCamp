@@ -95,7 +95,7 @@ onBeforeUnmount(() => {
       <div class="particles">
         <article class="particle-item" data-particle-reveal>
           <div class="particle-media">
-            <video src="/videos/bandada1.mp4" autoplay muted loop playsinline aria-label="Bandada de estorninos"></video>
+            <video src="/videos/concierto-publico.mp4" autoplay muted loop playsinline aria-label="Bandada de estorninos"></video>
           </div>
           <h3>Estorninos</h3>
           <div class="particle-copy">
@@ -119,7 +119,7 @@ onBeforeUnmount(() => {
 
         <article class="particle-item" data-particle-reveal>
           <div class="particle-media">
-            <video src="/videos/Bandada%20simple%20.mp4" autoplay muted loop playsinline aria-label="Vídeo de partículas"></video>
+            <video src="/videos/concierto.mp4" autoplay muted loop playsinline aria-label="Vídeo de partículas"></video>
           </div>
           <h3>Partículas</h3>
           <div class="particle-copy">
@@ -184,13 +184,13 @@ onBeforeUnmount(() => {
     </p>
     <div class="texture-video-stack" aria-label="Espacios preparados para vídeos de texturas">
       <div class="texture-video-slot texture-video-slot--wide">
-        <video src="/videos/1.mp4" autoplay muted loop playsinline aria-label="Vídeo de textura 1"></video>
+        <video src="/videos/video-hero.mp4" autoplay muted loop playsinline aria-label="Vídeo de textura 1"></video>
       </div>
       <div class="texture-video-slot texture-video-slot--medium">
-        <video src="/videos/2.mp4" autoplay muted loop playsinline aria-label="Vídeo de textura 2"></video>
+        <video src="/videos/video-atributos.mp4" autoplay muted loop playsinline aria-label="Vídeo de textura 2"></video>
       </div>
       <div class="texture-video-slot texture-video-slot--cloud">
-        <video src="/videos/3.mp4" autoplay muted loop playsinline aria-label="Vídeo de textura 3"></video>
+        <video src="/videos/concierto-publico.mp4" autoplay muted loop playsinline aria-label="Vídeo de textura 3"></video>
       </div>
     </div>
   </section>
