@@ -127,3 +127,155 @@
     </section>
   </section>
 </template>
+
+<style scoped lang="scss">
+.motion-section {
+  padding: 140px 0;
+}
+
+.motion-section > h2,
+.speed-curves h2,
+.club-card > h2 {
+  font-family: "POI Orbiter Trial", "POIOrbiterTrial", sans-serif;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 1;
+  text-align: center;
+  margin: 0 0 70px;
+}
+
+.speed-curves {
+  width: min(1060px, calc(100% - 12vw));
+  margin: 0 auto 170px;
+}
+
+.speed-layout {
+  display: grid;
+  grid-template-columns: 280px 150px minmax(0, 560px);
+  gap: 38px;
+  align-items: center;
+}
+
+.speed-copy {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.14;
+}
+
+.speed-legend {
+  display: grid;
+  gap: 74px;
+}
+
+.speed-legend article {
+  display: grid;
+  grid-template-columns: 18px 1fr;
+  gap: 12px;
+  align-items: start;
+}
+
+.legend-dot {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  margin-top: 4px;
+}
+
+.legend-dot--red {
+  background: #e92924;
+}
+
+.legend-dot--violet {
+  background: #bc8ebf;
+}
+
+.legend-dot--cyan {
+  background: #77c9e5;
+}
+
+.speed-legend h3 {
+  margin: 0 0 12px;
+  font-size: 21px;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.speed-legend p {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1;
+}
+
+.speed-chart-area {
+  display: grid;
+  gap: 22px;
+}
+
+.speed-chart {
+  width: 100%;
+  aspect-ratio: 560 / 390;
+  display: block;
+}
+
+.speed-curve {
+  fill: none;
+  stroke: #dedede;
+  stroke-width: 2.8;
+  stroke-linecap: round;
+}
+
+.speed-chart circle {
+  fill: #dedede;
+}
+
+.speed-chart [data-moving-dot] {
+  fill: #e92924;
+  pointer-events: none;
+}
+
+.speed-actions {
+  display: flex;
+  justify-content: center;
+  gap: 22px;
+}
+
+.speed-actions button {
+  border: 0;
+  border-radius: 5px;
+  background: #000;
+  color: #fff;
+  padding: 10px 13px;
+  font: inherit;
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.speed-actions button.active {
+  color: var(--active-color);
+}
+
+.motion-video-slot {
+  width: 100%;
+  min-height: 430px;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  align-items: center;
+  padding: 28px 0 54px;
+}
+
+.motion-video-slot h2 {
+  text-align: center;
+  margin: 0;
+  font-family: "POI Orbiter Trial", "POIOrbiterTrial", sans-serif;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.motion-video-slot--bandada {
+  min-height: 430px;
+}
+
+</style>
