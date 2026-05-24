@@ -1,3 +1,93 @@
+<script setup>
+import { onBeforeUnmount, onMounted, ref } from "vue";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+gsap.registerPlugin(ScrollTrigger);
+
+const particlesSection = ref(null);
+const solidCarousel = ref(null);
+const mixedCarousel = ref(null);
+const strokeCarousel = ref(null);
+let textureContext;
+
+const solidParticles = [31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41].map((n) => ({
+  id: n,
+  src: `/images/${n}.svg`,
+}));
+
+const mixedParticles = [15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29].map((n) => ({
+  id: n,
+  src: `/images/${n}.svg`,
+}));
+
+const strokeParticles = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14].map((n) => ({
+  id: n,
+  src: `/images/${n}.svg`,
+}));
+
+onMounted(() => {
+  textureContext = gsap.context(() => {
+    const particleItems = gsap.utils.toArray("[data-particle-reveal]");
+    gsap.set(particleItems, { autoAlpha: 0, y: 36 });
+
+    gsap.to(particleItems, {
+      autoAlpha: 1,
+      y: 0,
+      duration: 0.8,
+      ease: "power3.out",
+      stagger: 0.12,
+      scrollTrigger: {
+        trigger: particlesSection.value,
+        start: "top 72%",
+        once: true,
+      },
+    });
+
+    const createCarousel = (selector, startIndex = 1) => {
+      const cards = gsap.utils.toArray(selector);
+      if (!cards.length) return;
+
+      const total = cards.length;
+      let active = startIndex;
+      const renderCarousel = (animate = false) => {
+        cards.forEach((card, index) => {
+          let slot = (index - active + total) % total;
+          if (slot > total / 2) slot -= total;
+
+          const vars = {
+            xPercent: slot * 115,
+            scale: slot === 0 ? 1 : 0.72,
+            autoAlpha: Math.abs(slot) <= 1 ? 1 : 0,
+            zIndex: slot === 0 ? 3 : 2,
+            duration: 0.75,
+            ease: "power3.inOut",
+          };
+
+          if (animate) gsap.to(card, vars);
+          else gsap.set(card, vars);
+        });
+      };
+
+      renderCarousel();
+      gsap.timeline({ repeat: -1 })
+        .to({}, { duration: 1.8 })
+        .call(() => {
+          active = (active + 1) % total;
+          renderCarousel(true);
+        });
+    };
+
+    createCarousel("[data-solid-card]", 1);
+    createCarousel("[data-mixed-card]", 2);
+    createCarousel("[data-stroke-card]", 2);
+  });
+});
+
+onBeforeUnmount(() => {
+  textureContext?.revert();
+});
+</script>
+
 <template>
   <section id="texturas" class="texture-section">
     <section ref="particlesSection" class="particles-section">
