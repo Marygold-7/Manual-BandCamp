@@ -1,3 +1,161 @@
+<script setup>
+import { onBeforeUnmount, onMounted, ref } from "vue";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import ParticleCloud from "../ui/ParticleCloud.vue";
+
+gsap.registerPlugin(ScrollTrigger);
+
+const motionSection = ref(null);
+const activeSpeedCurve = ref(null);
+let motionContext;
+
+const speedCurves = {
+  settle: {
+    label: "Asentamiento",
+    color: "#e92924",
+    ease: "power2.inOut",
+  },
+  flock: {
+    label: "Bandada",
+    color: "#bc8ebf",
+    ease: "power3.out",
+  },
+  formation: {
+    label: "Formación",
+    color: "#77c9e5",
+    ease: "none",
+  },
+};
+
+const selectSpeedCurve = (key, animateMotion = true) => {
+  activeSpeedCurve.value = key;
+
+  const config = speedCurves[key];
+  const root = motionSection.value;
+  if (!root || !config) return;
+
+  const paths = Array.from(root.querySelectorAll("[data-speed-curve]"));
+  const activePath = root.querySelector(`[data-speed-curve="${key}"]`);
+  const movingDot = root.querySelector("[data-moving-dot]");
+  if (!activePath || !movingDot) return;
+
+  gsap.killTweensOf([activePath, movingDot, ...paths]);
+
+  paths.forEach((path) => {
+    const isActive = path.dataset.speedCurve === key;
+    gsap.set(path, {
+      stroke: isActive ? config.color : "#dedede",
+      strokeWidth: isActive ? 4 : 3,
+      opacity: 1,
+    });
+  });
+
+  const length = activePath.getTotalLength();
+
+  gsap.fromTo(
+    activePath,
+    {
+      strokeDasharray: length,
+      strokeDashoffset: length,
+    },
+    {
+      strokeDashoffset: 0,
+      duration: 0.9,
+      ease: "power2.inOut",
+    }
+  );
+
+  if (!animateMotion) return;
+
+  const progress = { value: 0 };
+  gsap.to(progress, {
+    value: 1,
+    duration: 1.25,
+    ease: config.ease,
+    onStart: () => {
+      const point = activePath.getPointAtLength(0);
+      gsap.set(movingDot, {
+        attr: { cx: point.x, cy: point.y },
+        fill: config.color,
+        autoAlpha: 1,
+        scale: 1,
+        transformOrigin: "center",
+      });
+    },
+    onUpdate: () => {
+      const point = activePath.getPointAtLength(length * progress.value);
+      gsap.set(movingDot, {
+        attr: { cx: point.x, cy: point.y },
+      });
+    },
+    onComplete: () => {
+      gsap.to(movingDot, {
+        autoAlpha: 0,
+        duration: 0.25,
+        ease: "power2.out",
+      });
+    },
+  });
+};
+
+onMounted(() => {
+  motionContext = gsap.context(() => {
+    const curveItems = gsap.utils.toArray("[data-motion-reveal]");
+    const paths = gsap.utils.toArray("[data-speed-curve]");
+    const movingDot = motionSection.value?.querySelector("[data-moving-dot]");
+
+    gsap.set(curveItems, { autoAlpha: 0, y: 34 });
+    gsap.set(movingDot, { autoAlpha: 0, scale: 0.7, transformOrigin: "center" });
+
+    paths.forEach((path) => {
+      const length = path.getTotalLength();
+      gsap.set(path, {
+        strokeDasharray: length,
+        strokeDashoffset: 0,
+        stroke: "#dedede",
+        strokeWidth: 3,
+      });
+    });
+
+    gsap.timeline({
+      scrollTrigger: {
+        trigger: ".speed-curves",
+        start: "top 72%",
+        once: true,
+      },
+    })
+      .to(curveItems, {
+        autoAlpha: 1,
+        y: 0,
+        duration: 0.75,
+        stagger: 0.1,
+        ease: "power3.out",
+      })
+
+    const isotopeItems = gsap.utils.toArray("[data-isotope-reveal]");
+    gsap.set(isotopeItems, { autoAlpha: 0, y: 34, scale: 0.96 });
+    gsap.to(isotopeItems, {
+      autoAlpha: 1,
+      y: 0,
+      scale: 1,
+      duration: 0.75,
+      stagger: 0.11,
+      ease: "power3.out",
+      scrollTrigger: {
+        trigger: ".isotype-motion",
+        start: "top 72%",
+        once: true,
+      },
+    });
+  }, motionSection);
+});
+
+onBeforeUnmount(() => {
+  motionContext?.revert();
+});
+</script>
+
 <template>
   <section id="motion" ref="motionSection" class="motion-section">
     <section class="speed-curves">
@@ -278,4 +436,130 @@
   min-height: 430px;
 }
 
+.loader {
+  height: 100%;
+  display: grid;
+  place-items: center;
+}
+
+.loader video,
+.bandada video {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.bandada {
+  height: 100%;
+  display: grid;
+  align-items: center;
+  justify-items: center;
+}
+
+.club-card {
+  background: #fff;
+  padding: 70px 0 90px;
+  display: grid;
+  justify-items: center;
+}
+
+.club-card video {
+  width: 100%;
+  height: 720px;
+  display: block;
+  object-fit: cover;
+}
+
+.club-card article {
+  width: 310px;
+  background: #fff;
+  border-radius: 20px;
+  padding: 28px;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.18);
+}
+
+.club-card h3 {
+  font-size: 34px;
+  margin: 8px 0;
+}
+
+.club-card button {
+  background: #000;
+  color: #fff;
+  border: 0;
+  border-radius: 5px;
+  padding: 12px 16px;
+}
+
+.isotype-motion {
+  width: min(560px, calc(100% - 48px));
+  margin: 135px auto 0;
+  display: grid;
+  justify-items: center;
+}
+
+.isotype-motion h2 {
+  margin: 0 0 92px;
+  font-family: "POI Orbiter Trial", "POIOrbiterTrial", sans-serif;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 1;
+  text-align: center;
+}
+
+.isotype-cluster {
+  width: 310px;
+  margin-bottom: 70px;
+}
+
+.isotype-cluster img {
+  width: 100%;
+  display: block;
+  object-fit: contain;
+}
+
+.isotype-motion p {
+  width: min(470px, 100%);
+  margin: 0;
+  font-family: "POI Orbiter Trial", "POIOrbiterTrial", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.14;
+}
+
+@media (max-width: 900px) {
+  .speed-layout {
+    grid-template-columns: 1fr;
+    gap: 44px;
+  }
+
+  .speed-legend {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .speed-actions {
+    flex-wrap: wrap;
+  }
+
+  .speed-actions button {
+    font-size: 18px;
+  }
+
+  .bandada {
+    padding: 0;
+    justify-content: center;
+  }
+
+  .isotype-motion {
+    margin-top: 90px;
+  }
+
+  .isotype-cluster {
+    transform: scale(0.82);
+    transform-origin: center;
+    margin-bottom: 36px;
+  }
+}
 </style>
