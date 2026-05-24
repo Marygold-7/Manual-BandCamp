@@ -104,3 +104,114 @@
     </div>
   </section>
 </template>
+
+<style scoped lang="scss">
+.image-section {
+  padding: 150px 8vw 0;
+}
+
+.image-content {
+  width: min(760px, 100%);
+  margin: 0 auto;
+}
+
+.image-content h2 {
+  text-align: center;
+  font-size: 30px;
+  font-weight: 600;
+  line-height: 1;
+  margin: 0 0 82px;
+}
+
+.image-intro {
+  width: min(590px, 100%);
+  margin: 0 auto 72px;
+  display: grid;
+  gap: 22px;
+}
+
+.image-intro p {
+  margin: 0;
+  font-family: "POI Orbiter Trial", "POIOrbiterTrial", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.17;
+}
+
+.reference-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 28px;
+  margin: 0 auto 178px;
+}
+
+.reference-card {
+  margin: 0;
+}
+
+.reference-card img {
+  width: 100%;
+  aspect-ratio: 16 / 11.1;
+  display: block;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.reference-card figcaption {
+  margin-top: 14px;
+  text-align: center;
+  font-family: "POI Orbiter Trial", "POIOrbiterTrial", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.next-heading {
+  margin-bottom: 36px;
+}
+
+.horizontal-block {
+  width: min(900px, 100%);
+  margin: 0 auto;
+}
+
+.horizontal-carousel {
+  position: relative;
+  width: min(860px, 100%);
+  height: 310px;
+  display: grid;
+  place-items: center;
+  margin: 0 auto 62px;
+  overflow: visible;
+}
+
+.horizontal-card {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 360px;
+  height: 235px;
+  margin: 0;
+  border-radius: 10px;
+  overflow: hidden;
+  transform-origin: center center;
+  will-change: transform, opacity;
+}
+
+.horizontal-card img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.horizontal-copy {
+  width: min(320px, 100%);
+  margin: 0 auto 170px;
+  font-family: "POI Orbiter Trial", "POIOrbiterTrial", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.14;
+}
+
+</style>
