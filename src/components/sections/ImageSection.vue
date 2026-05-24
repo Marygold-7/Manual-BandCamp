@@ -214,4 +214,114 @@
   line-height: 1.14;
 }
 
+.vertical-block {
+  width: min(900px, 100%);
+  margin: 0 auto;
+}
+
+.vertical-block h2 {
+  margin-bottom: 48px;
+}
+
+.vertical-carousel {
+  position: relative;
+  width: min(840px, 100%);
+  height: 470px;
+  display: grid;
+  place-items: center;
+  margin: 0 auto 74px;
+  overflow: visible;
+}
+
+.vertical-card {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 250px;
+  height: 405px;
+  margin: 0;
+  border-radius: 10px;
+  overflow: hidden;
+  transform-origin: center center;
+  will-change: transform, opacity;
+}
+
+.vertical-card img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.vertical-copy {
+  width: min(320px, 100%);
+  margin: 0 auto 185px;
+  font-family: "POI Orbiter Trial", "POIOrbiterTrial", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.14;
+}
+
+.common-factor {
+  width: min(880px, 100%);
+  margin: 0 auto 160px;
+}
+
+.common-factor h2 {
+  margin-bottom: 70px;
+}
+
+.common-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
+  gap: 66px;
+  align-items: start;
+}
+
+.common-item {
+  position: relative;
+  display: grid;
+}
+
+.common-item--horizontal {
+  padding-top: 22px;
+}
+
+.common-item--vertical {
+  justify-items: center;
+}
+
+.common-shape {
+  width: 100%;
+  background: #d9d9d9;
+  border-radius: 10px;
+}
+
+.common-item--horizontal .common-shape {
+  aspect-ratio: 16 / 10.65;
+}
+
+.common-item--vertical .common-shape {
+  width: min(300px, 100%);
+  height: 420px;
+}
+
+.common-measure {
+  margin-top: 20px;
+  color: #ff1f1f;
+  font-family: "POI Orbiter Trial", "POIOrbiterTrial", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.common-item--horizontal p {
+  width: min(330px, 100%);
+  margin: 46px 0 0 6px;
+  font-family: "POI Orbiter Trial", "POIOrbiterTrial", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.14;
+}
+
 </style>
