@@ -1,4 +1,8 @@
 
+<script setup>
+import { colorBasics, accentColors } from "../../data/brandData";
+</script>
+
 <template>
   <section id="color" class="color-section">
     <article class="color-block">
