@@ -16,7 +16,7 @@ const applications = {
   posterWhite: "/assets/applications/poster-white.png",
   tickets: "/assets/applications/tickets.png",
   tshirt: "/assets/applications/stickers-tshirt.png",
-  box: "/assets/applications/mailer-box.png",
+  box: "/images/mock%20up%209.jpg",
 };
 
 onMounted(() => {

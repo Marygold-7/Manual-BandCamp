@@ -191,10 +191,10 @@ onBeforeUnmount(() => {
         <video src="/videos/video-hero.mp4" autoplay muted loop playsinline aria-label="Vídeo de textura 1"></video>
       </div>
       <div class="texture-video-slot texture-video-slot--medium">
-        <video src="/videos/video-atributos.mp4" autoplay muted loop playsinline aria-label="Vídeo de textura 2"></video>
+        <video src="/videos/2.mp4" autoplay muted loop playsinline aria-label="Vídeo de textura 2"></video>
       </div>
       <div class="texture-video-slot texture-video-slot--cloud">
-        <video src="/videos/concierto-publico.mp4" autoplay muted loop playsinline aria-label="Vídeo de textura 3"></video>
+        <video src="/videos/3.mp4" autoplay muted loop playsinline aria-label="Vídeo de textura 3"></video>
       </div>
     </div>
   </section>

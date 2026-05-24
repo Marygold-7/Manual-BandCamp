@@ -2,7 +2,6 @@
 import { onBeforeUnmount, onMounted, ref } from "vue";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import ParticleCloud from "../ui/ParticleCloud.vue";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -262,17 +261,20 @@ onBeforeUnmount(() => {
     <section class="motion-video-slot motion-video-slot--bandada">
       <h2>Bandada</h2>
       <div class="bandada">
-        <video src="/videos/concierto-publico.mp4" autoplay muted loop playsinline></video>
+        <video src="/videos/2.mp4" autoplay muted loop playsinline></video>
       </div>
     </section>
     <div class="club-card">
       <h2>Card BandCamp Clubs</h2>
-      <video src="/videos/video-atributos.mp4" autoplay muted loop playsinline></video>
+      <video src="/videos/Card%20particulas.mp4" autoplay muted loop playsinline></video>
     </div>
     <section class="isotype-motion">
       <h2 data-isotope-reveal>Animaciones isotipo</h2>
       <div class="isotype-cluster" data-isotope-reveal>
-        <ParticleCloud />
+        <img
+          src="/images/imagen%20animaciones%20isotipo.png"
+          alt="Animaciones del isotipo Bandcamp"
+        />
       </div>
       <p data-isotope-reveal>
         El símbolo basado en partículas puede utilizarse también como elemento

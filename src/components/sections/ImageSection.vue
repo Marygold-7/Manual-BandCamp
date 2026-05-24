@@ -2,7 +2,6 @@
 import { onBeforeUnmount, onMounted, ref } from "vue";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { appImages, imageCards } from "../../data/brandData";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -11,9 +10,26 @@ const horizontalCarousel = ref(null);
 const verticalCarousel = ref(null);
 let imageContext;
 
-const referenceImages = imageCards.slice(0, 2);
-const horizontalImages = imageCards.map((img, index) => ({ id: index + 1, src: img.src }));
-const verticalImages = appImages.slice(0, 3).map((src, index) => ({ id: index + 1, src }));
+const referenceImages = [
+  {
+    label: "Piper Ferguson",
+    src: "/images/Piper%20Ferguson.png",
+  },
+  {
+    label: "Rafa Ariño",
+    src: "/images/Rafa%20Ariño.png",
+  },
+];
+
+const horizontalImages = [1, 2, 3, 4].map((id) => ({
+  id,
+  src: `/images/Imagen%20horizontal%20${id}.png`,
+}));
+
+const verticalImages = [1, 2, 3].map((id) => ({
+  id,
+  src: `/images/Imagen%20vertical%20${id}.png`,
+}));
 
 onMounted(() => {
   imageContext = gsap.context(() => {

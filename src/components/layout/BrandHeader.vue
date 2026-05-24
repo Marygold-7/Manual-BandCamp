@@ -7,7 +7,9 @@ const props = defineProps({
 </script>
 <template>
   <header class="brand-header">
-    <a class="brand-logo" href="#top">BandCamp</a>
+    <a class="brand-logo" href="#top" aria-label="BandCamp">
+      <img src="/assets/albums/Isotipo%20B.png" alt="" />
+    </a>
     <nav class="brand-nav" aria-label="Navegación principal">
       <a
         v-for="item in navItems"
@@ -28,23 +30,34 @@ const props = defineProps({
   max-width: 1380px;
   width: calc(100% - 32px);
   height: 34px;
-  padding: 0 34px;
+  padding: 0;
   border-radius: 4px;
-  background: black;
+  background: transparent;
   display: flex;
   align-items: center;
   gap: 52px;
 }
 .brand-logo {
-  font-size: 28px;
-  font-weight: 800;
-  color: #000;
+  height: 34px;
+  display: grid;
+  place-items: center;
   text-decoration: none;
-  white-space: nowrap;
+  background: transparent;
+}
+.brand-logo img {
+  width: 34px;
+  height: 28px;
+  display: block;
+  object-fit: contain;
 }
 .brand-nav {
   flex: 1;
+  height: 34px;
+  padding: 0 34px;
+  border-radius: 4px;
+  background: black;
   display: flex;
+  align-items: center;
   justify-content: space-between;
   gap: 18px;
 }
@@ -61,15 +74,16 @@ const props = defineProps({
   .brand-header {
     height: auto;
     align-items: flex-start;
-    padding: 16px;
+    padding: 0;
     flex-direction: column;
     gap: 12px;
   }
   .brand-nav {
     overflow: auto;
     width: 100%;
+    height: auto;
+    padding: 16px;
     justify-content: flex-start;
-    padding-bottom: 6px;
   }
 }
 </style>
