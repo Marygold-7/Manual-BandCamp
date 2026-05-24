@@ -235,4 +235,111 @@
   border: 2px solid #000;
 }
 
+.strokes span {
+  background: repeating-linear-gradient(
+    160deg,
+    #000 0 5px,
+    transparent 5px 12px
+  );
+  border-radius: 30%;
+}
+.texture-video-stack {
+  width: calc(100% + 16vw);
+  margin: -10px -8vw 0;
+}
+.texture-video-slot {
+  min-height: 360px;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+.texture-video-slot video {
+  width: 100%;
+  height: 100%;
+  min-height: inherit;
+  display: block;
+  object-fit: cover;
+}
+.texture-video-slot + .texture-video-slot {
+  margin-top: 56px;
+}
+.texture-video-slot--wide {
+  min-height: 390px;
+}
+.texture-video-slot--medium {
+  min-height: 340px;
+}
+.texture-video-slot--cloud {
+  min-height: 340px;
+}
+.brand-particles {
+  width: min(720px, 78vw);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+}
+.brand-particles--wide {
+  transform: translateY(2px);
+}
+.brand-particles--medium {
+  width: min(520px, 70vw);
+  gap: 18px;
+  transform: scale(0.82);
+}
+.brand-particles--cloud {
+  width: min(520px, 70vw);
+  transform: scale(0.85);
+}
+.brand-particles h2 {
+  font-size: 64px;
+  margin: 0;
+  line-height: 1;
+  white-space: nowrap;
+}
+.brand-particles--medium h2 {
+  font-size: 52px;
+}
+@media (max-width: 800px) {
+  .particles {
+    grid-template-columns: 1fr;
+  }
+  .texture-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .solid-carousel {
+    width: min(100%, 360px);
+    height: 190px;
+  }
+  .solid-card {
+    width: 160px;
+  }
+  .texture-note {
+    margin: -12px auto 120px;
+  }
+  .mixed-card {
+    width: 170px;
+  }
+  .texture-video-stack {
+    width: calc(100% + 16vw);
+  }
+  .texture-video-slot {
+    min-height: 260px;
+  }
+  .texture-video-slot + .texture-video-slot {
+    margin-top: 36px;
+  }
+  .brand-particles {
+    flex-direction: column;
+    width: min(320px, 84vw);
+    gap: 12px;
+  }
+  .brand-particles h2 {
+    font-size: 42px;
+  }
+  .brand-particles--medium,
+  .brand-particles--cloud {
+    transform: scale(0.9);
+  }
+}
 </style>
