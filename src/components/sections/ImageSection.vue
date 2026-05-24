@@ -132,6 +132,140 @@ onMounted(() => {
         const width = horizontalCarousel.value?.clientWidth || 840;
         return Math.min(width * 0.36, 310);
       };
+
+      const render = (animate = false) => {
+        cards.forEach((card, index) => {
+          let slot = (index - active + total) % total;
+          if (slot > total / 2) slot -= total;
+
+          const vars = {
+            xPercent: -50,
+            yPercent: -50,
+            x: slot * getDistance(),
+            y: 0,
+            scale: slot === 0 ? 1.06 : 0.82,
+            autoAlpha: Math.abs(slot) <= 1 ? 1 : 0,
+            zIndex: slot === 0 ? 5 : 2,
+            duration: 0.85,
+            ease: "power3.inOut",
+          };
+
+          if (animate) gsap.to(card, vars);
+          else gsap.set(card, vars);
+        });
+      };
+
+      render();
+      gsap.timeline({ repeat: -1 })
+        .to({}, { duration: 2.05 })
+        .call(() => {
+          active = (active + 1) % total;
+          render(true);
+        });
+    };
+
+    const verticalText = gsap.utils.toArray("[data-vertical-reveal]");
+    gsap.set(verticalText, {
+      autoAlpha: 0,
+      y: 44,
+    });
+
+    gsap.to(verticalText, {
+      autoAlpha: 1,
+      y: 0,
+      duration: 0.9,
+      ease: "power3.out",
+      stagger: 0.14,
+      scrollTrigger: {
+        trigger: ".vertical-block",
+        start: "top 72%",
+        once: true,
+      },
+    });
+
+    const createImageCarousel = (selector, startIndex = 1) => {
+      const cards = Array.from(
+        verticalCarousel.value?.querySelectorAll(selector) || []
+      );
+      if (!cards.length) return;
+
+      const total = cards.length;
+      let active = startIndex;
+      const getDistance = () => {
+        const width = verticalCarousel.value?.clientWidth || 840;
+        return Math.min(width * 0.34, 280);
+      };
+
+      const render = (animate = false) => {
+        cards.forEach((card, index) => {
+          let slot = (index - active + total) % total;
+          if (slot > total / 2) slot -= total;
+
+          const vars = {
+            xPercent: -50,
+            yPercent: -50,
+            x: slot * getDistance(),
+            y: 0,
+            scale: slot === 0 ? 1.06 : 0.92,
+            autoAlpha: Math.abs(slot) <= 1 ? 1 : 0,
+            zIndex: slot === 0 ? 5 : 2,
+            duration: 0.85,
+            ease: "power3.inOut",
+          };
+
+          if (animate) gsap.to(card, vars);
+          else gsap.set(card, vars);
+        });
+      };
+
+      render();
+      gsap.timeline({ repeat: -1 })
+        .to({}, { duration: 2.05 })
+        .call(() => {
+          active = (active + 1) % total;
+          render(true);
+        });
+    };
+
+    createHorizontalCarousel("[data-horizontal-card]", 1);
+    createImageCarousel("[data-vertical-card]", 1);
+
+    const commonItems = gsap.utils.toArray("[data-common-reveal]");
+    const commonArrows = gsap.utils.toArray("[data-common-arrow]");
+    gsap.set(commonItems, {
+      autoAlpha: 0,
+      y: 42,
+    });
+    gsap.set(commonArrows, {
+      autoAlpha: 0,
+    });
+
+    gsap.timeline({
+      scrollTrigger: {
+        trigger: ".common-factor",
+        start: "top 72%",
+        once: true,
+      },
+    })
+      .to(commonItems, {
+        autoAlpha: 1,
+        y: 0,
+        duration: 0.9,
+        ease: "power3.out",
+        stagger: 0.12,
+      })
+      .to(commonArrows, {
+        autoAlpha: 1,
+        duration: 0.65,
+        ease: "power2.out",
+        stagger: 0.12,
+      }, "+=0.2");
+  }, imageSection);
+});
+
+onBeforeUnmount(() => {
+  imageContext?.revert();
+});
 </script>
 
 <template>
